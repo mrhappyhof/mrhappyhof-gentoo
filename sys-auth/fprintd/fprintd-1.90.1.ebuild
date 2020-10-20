@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit pam meson
+inherit pam meson systemd
 
 DESCRIPTION="D-Bus service to access fingerprint readers"
 HOMEPAGE="https://gitlab.freedesktop.org/libfprint/fprintd"
@@ -46,6 +46,7 @@ src_configure(){
 		--prefix=/usr/
 		-Dpam_modules_dir="$(getpam_mod_dir)"
 		-Dgtk_doc=$(usex doc true false)
+		-Dsystemd_system_unit_dir=$(usex systemd "$(systemd_get_systemunitdir)" "") 
 	)
 	meson_src_configure
 }
