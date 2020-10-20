@@ -15,7 +15,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="doc pam static-libs systemd"
 
 DEPEND="systemd? ( sys-apps/systemd )
-	!systemd ( sys-auth/elogind)
+	!systemd? ( sys-auth/elogind )
 	sys-apps/dbus
 	dev-libs/dbus-glib
 	dev-libs/glib:2
