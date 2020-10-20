@@ -26,7 +26,7 @@ RDEPEND="${DEPEND}
 	dev-python/dbus-python
 	dev-python/dbusmock
 	dev-python/pycairo
-	pam? ( >=sys-auth/pam_wrapper-1.1.0 )
+	pam? ( >=sys-libs/pam_wrapper-1.1.0 )
 	doc? (
 		dev-util/gtk-doc
 		dev-util/gtk-doc-am
