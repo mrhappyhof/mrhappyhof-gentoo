@@ -1,0 +1,12 @@
+<repositories encoding="unicode" version="1.1">
+  <repo priority="50" quality="experimental">
+    <name>mrhappyhof-gentoo</name>
+    <description>mr_happy_hof's Overlay</description>
+    <homepage>https://github.com/mrhappyhof/mrhappyhof-gentoo</homepage>
+    <owner>
+      <email>mr_happy_hof</email>
+      <name>mr_happy_hof</name>
+    </owner>
+    <source type="git">https://github.com/mrhappyhof/mrhappyhof-gentoo.git</source>
+  </repo>
+</repositories>
