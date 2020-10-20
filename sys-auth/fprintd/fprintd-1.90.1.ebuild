@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit meson
+inherit pam meson
 
 DESCRIPTION="D-Bus service to access fingerprint readers"
 HOMEPAGE="https://gitlab.freedesktop.org/libfprint/fprintd"
@@ -12,30 +12,40 @@ SRC_URI="https://gitlab.freedesktop.org/libfprint/${PN}/-/archive/${PV}/${P}.tar
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="doc"
+IUSE="doc pam static-libs systemd"
 
-DEPEND="dev-libs/libgusb
-sys-auth/libfprint
-sys-libs/pam_wrapper
-dev-python/dbusmock
-dev-python/dbus-python
-sys-auth/elogind
-sys-apps/openrc
-sys-libs/pam
-doc? ( dev-util/gtk-doc dev-util/gtk-doc-am dev-libs/libxml2 dev-libs/libxslt )
-"
-RDEPEND="${DEPEND}"
+DEPEND="systemd? ( sys-apps/systemd )
+	!systemd ( sys-auth/elogind)
+	sys-apps/dbus
+	dev-libs/dbus-glib
+	dev-libs/glib:2
+	>=sys-auth/libfprint-1.90.0
+	sys-auth/polkit
+	pam? ( sys-libs/pam )"
+RDEPEND="${DEPEND}
+	dev-python/dbus-python
+	dev-python/dbusmock
+	dev-python/pycairo
+	pam? ( >=sys-auth/pam_wrapper-1.1.0 )
+	doc? (
+		dev-util/gtk-doc
+		dev-util/gtk-doc-am
+	)"
+
 BDEPEND="virtual/pkgconfig"
 
 src_prepare(){
-    eapply "${FILESDIR}/${PV}-elogind.patch"
+    use systemd || eapply "${FILESDIR}/${PV}-elogind.patch"
     eapply_user
 }
 
 src_configure(){
 	local emesonargs=(
-		$(meson_use doc gtk_doc)
+		-Dpam=$(usex pam true false)
+		-Dman=true
 		--prefix=/usr/
+		-Dpam_modules_dir="$(getpam_mod_dir)"
+		-Dgtk_doc=$(usex doc true false)
 	)
 	meson_src_configure
 }
