@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+  <maintainer type="person">
+    <email>mrhappyhof@gmail.com</email>
+    <name>mr_happy_hof</name>
+  </maintainer>
+  <longdescription lang="en">
+    D-Bus service to access fingerprint readers
+  </longdescription>
+  <upstream>
+    <bugs-to><bugs-to>https://gitlab.freedesktop.org/libfprint/fprintd/issues</bugs-to>
+  </upstream>
+</pkgmetadata>
